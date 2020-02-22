@@ -23,7 +23,7 @@ window.addEventListener('DOMContentLoaded', function() {
   
   const checkTime = (i) => {
     if ( i < 10 ) {
-      i="0" + i;
+      i = '0' + i;
     }
     return i;
   }
@@ -54,4 +54,6 @@ window.addEventListener('DOMContentLoaded', function() {
     document.write(`До нового года осталось ${daysLeft} ${dayname}!`);
   }
   daysLeftNewYear();
+
+
 });
