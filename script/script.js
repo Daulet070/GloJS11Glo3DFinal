@@ -124,43 +124,47 @@ window.addEventListener('DOMContentLoaded', function(){
           popupBtn = document.querySelectorAll('.popup-btn'),
           popUpClose = document.querySelector('.popup-close');
 
-  popupBtn.forEach((elem) => {
-    elem.addEventListener('click', () => {
-      let popupInterval,
-          count = 0;
-      const popupAnimate = () => {
-        popupInterval = requestAnimationFrame(popupAnimate);
-        count++;
-        if (screen.width < 768) {
-          cancelAnimationFrame(popupInterval);
-          popup.style.display = 'block';
-        } else if (count < 100) {
-          popup.style.display = 'block';
-          popup.style.opacity = count*8 + '%';
-          console.log('count: ', count);
+    popupBtn.forEach((elem) => {
+      elem.addEventListener('click', () => {
+        let popupInterval,
+            count = 0;
+        const popupAnimate = () => {
+          popupInterval = requestAnimationFrame(popupAnimate);
+          count++;
+          if (screen.width < 768) {
+            cancelAnimationFrame(popupInterval);
+            popup.style.display = 'block';
+          } else if (count < 100) {
+            popup.style.display = 'block';
+            popup.style.opacity = count*8 + '%';
+            console.log('count: ', count);
+          }
         }
-      }
-      popupInterval = requestAnimationFrame(popupAnimate);
+        popupInterval = requestAnimationFrame(popupAnimate);
+      });
     });
-  });
 
-  popUpClose.addEventListener('click', () => {
-    let popupInterval,
-          count = 100;
-      const popupAnimate = () => {
-        popupInterval = requestAnimationFrame(popupAnimate);
-        count--;
-        if (screen.width < 768) {
-          cancelAnimationFrame(popupInterval);
-          popup.style.display = 'none'
-        } else if (count > 0) {
-          popup.style.opacity = count*2 + '%';
-          if (count === 1) popup.style.display = 'none';
-          console.log('count: ', count);
+    popUpClose.addEventListener('click', () => {
+      let popupInterval,
+            count = 100;
+        const popupAnimate = () => {
+          popupInterval = requestAnimationFrame(popupAnimate);
+          count--;
+          if (screen.width < 768) {
+            cancelAnimationFrame(popupInterval);
+            popup.style.display = 'none'
+          } else if (count > 0) {
+            popup.style.opacity = count*20 + '%';
+            if (count === 1) popup.style.display = 'none';
+            console.log('count: ', count);
+          }
         }
-      }
-      popupInterval = requestAnimationFrame(popupAnimate);
+        popupInterval = requestAnimationFrame(popupAnimate);
     });
+
+    popup.addEventListener('click', () => {
+      popup.style.display = 'none';
+    })
   };
   togglePopUp();
 });
