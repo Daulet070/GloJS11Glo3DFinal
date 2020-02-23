@@ -46,75 +46,16 @@ window.addEventListener('DOMContentLoaded', function(){
           closeBtn = document.querySelector('.close-btn'),
           menuItems = menu.querySelectorAll('ul>li');
     const handlerMenu = () => {
-      menu.classList.toggle('active-menu');
-      // if (!menu.style.transform || menu.style.transform === `translate(-100%)`) {
-      //   menu.style.transform = `translate(0)`;
-      // } else {
-      //   menu.style.transform = `translate(-100%)`;
-      // }
     };
-    // function scrollAnimate ({timing, draw, duration}) {
-    //   let start = performance.now();
-    //   requestAnimationFrame(function scrollAnimate(time) {
-    //     let timeFraction = (time - start) / duration;
-    //     if (timeFraction > 1) timeFraction = 1;
-    //     let progress = timing(timeFraction);
 
-    //     draw(progress); // отрисовать её
-
-    //     if (timeFraction < 1) {
-    //       requestAnimationFrame(scrollAnimate);
-    //     }
-    //   });
-    // };
     btnMenu.addEventListener('click', handlerMenu);
     closeBtn.addEventListener('click', handlerMenu);
     menuItems.forEach((elem) => {
 
       elem.addEventListener('click', () => {
         setTimeout(handlerMenu, 1000);
-        // scrollAnimate({
-
-        //   duration: 1000,
-        //   timing: function(timeFraction) {
-        //     return timeFraction;
-        //   },
-        //   draw: function(progress) {
-        //     let htmlDoc = document.querySelector('html'),
-        //     topPosition;
-        //     if(menuItems[0]){
-        //       topPosition = 830;
-        //     } else if (menuItems[1]){
-        //       topPosition = 2037;
-        //     }
-        //     htmlDoc.scrollTop = progress * topPosition;
-        //     console.log('topPosition: ', topPosition);
-        //   }
-        // })
-        // let prev = performance.now();
-        // let times = 0;
-        // requestAnimationFrame(function scroll(time) {
-        //   let htmlDoc = document.querySelector('html');
-        //   let tt = Math.floor(time - prev);
-        //   prev = time;
-        // })
-
-        // let scrollInterval,
-        //   htmlDoc = document.querySelector('html'),
-        //   count = 0;
-        
-        // const scrollAnimate = () => {
-        //   scrollInterval = requestAnimationFrame(scrollAnimate);
-          
-        //   if (menuItems[0] && count < 830) {
-        //     count++;
-        //     htmlDoc.scrollTop = count;
-        //     console.log('htmlDoc.scrollTop: ', htmlDoc.scrollTop);
-        //   }
-        // }
-        // scrollInterval = requestAnimationFrame(scrollAnimate);
-        // });
       });
+      
     });
   };
   toggleMenu();
@@ -140,15 +81,6 @@ window.addEventListener('DOMContentLoaded', function(){
           }
         }
         popupInterval = requestAnimationFrame(popupAnimate);
-        // let count = 0;
-        // let popupInterval = setInterval(() => {
-        //     count++;
-        //     popup.style.display = 'block';
-        //     popup.style.opacity = count*20 + '%';
-        //   }, 50);
-        //   setTimeout(() => {
-        //     clearInterval(popupInterval)
-        //   }, 250)
       });
     });
     
