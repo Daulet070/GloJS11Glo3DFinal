@@ -126,76 +126,57 @@ window.addEventListener('DOMContentLoaded', function(){
 
     popupBtn.forEach((elem) => {
       elem.addEventListener('click', () => {
-        
-          let count = 0;
-          let popupInterval = setInterval(() => {
-              count++;
-              popup.style.display = 'block';
-              popup.style.opacity = count*20 + '%';
-              console.log('count1: ', popup.style.opacity);
-            }, 60)
-            setTimeout(() => {
-              clearInterval(popupInterval)
-            }, 300)
-            
-        // const popupAnimate = () => {
-        //   popupInterval = requestAnimationFrame(popupAnimate);
-          
-
-        //   if (screen.width < 768) {
-        //     cancelAnimationFrame(popupInterval);
+        let popupInterval,
+            count = 0;
+        const popupAnimate = () => {
+          popupInterval = requestAnimationFrame(popupAnimate);
+          count++;
+          if (screen.width < 768) {
+            cancelAnimationFrame(popupInterval);
+            popup.style.display = 'block';
+          } else if (count < 11) {
+            popup.style.display = 'block';
+            popup.style.opacity = count*10 + '%';
+          }
+        }
+        popupInterval = requestAnimationFrame(popupAnimate);
+        // let count = 0;
+        // let popupInterval = setInterval(() => {
+        //     count++;
         //     popup.style.display = 'block';
-        //   } else if (count < 100) {
-        //     popup.style.display = 'block';
-        //     popup.style.opacity = count*8 + '%';
-        //     console.log('count: ', count);
-        //   }
-        // }
-        // popupInterval = requestAnimationFrame(popupAnimate);
+        //     popup.style.opacity = count*20 + '%';
+        //   }, 50);
+        //   setTimeout(() => {
+        //     clearInterval(popupInterval)
+        //   }, 250)
       });
+    });
+    
+    popup.addEventListener('click', (event) => {
+      let target = event.target;
+          target = target.closest('.popup-content');
+      if (target){
+        popup.style.display = 'block';
+      } else {
+        popup.style.display = 'none';
+      }
     });
 
     popUpClose.addEventListener('click', () => {
-      let count = 10;
-      let animationFrame2 = setInterval(()=>{
-        let a = count-- /10;
-        popup.style.opacity = a;
-        console.log('a: ', a);
-        if(a == 0){
-          clearInterval(animationFrame2);
-          popup.style.display = 'none';
+      let popupInterval,
+          count = 10;
+      const popupAnimate = () => {
+        popupInterval = requestAnimationFrame(popupAnimate);
+        count--;
+        if (screen.width < 768) {
+          cancelAnimationFrame(popupInterval);
+          popup.style.display = 'none'
+        } else if (count > 0) {
+          popup.style.opacity = count*10 + '%';
+          if (count === 1) popup.style.display = 'none';
         }
-      },50)
-      // let count = 10;
-      // let popupInterval = setInterval(() => {
-      //     count-- ;
-          
-      //     popup.style.opacity = +count + '%';
-      //     if ( count === 0 ) popup.style.display = 'none';
-      //     console.log('count2: ', popup.style.opacity);
-      // }, 60)
-      // setTimeout(() => {
-      //   clearInterval(popupInterval)
-      // }, 300)
-      // let popupInterval,
-      //       count = 100;
-      //   const popupAnimate = () => {
-      //     popupInterval = requestAnimationFrame(popupAnimate);
-      //     count--;
-      //     if (screen.width < 768) {
-      //       cancelAnimationFrame(popupInterval);
-      //       popup.style.display = 'none'
-      //     } else if (count > 0) {
-      //       popup.style.opacity = count*20 + '%';
-      //       if (count === 1) popup.style.display = 'none';
-      //       console.log('count: ', count);
-      //     }
-      //   }
-      //   popupInterval = requestAnimationFrame(popupAnimate);
-    });
-
-    popup.addEventListener('click', () => {
-      popup.style.display = 'none';
+      }
+      popupInterval = requestAnimationFrame(popupAnimate);
     })
   };
   togglePopUp();
