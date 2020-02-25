@@ -140,12 +140,11 @@ window.addEventListener('DOMContentLoaded', function(){
   // Слайдер
   const slider = () => {
     const slide = document.querySelectorAll('.portfolio-item'),
-          btn = document.querySelectorAll('.portfolio-btn'),
+          // btn = document.querySelectorAll('.portfolio-btn'),
           dotList = document.querySelector('.portfolio-dots'),
           slider = document.querySelector('.portfolio-content');
     
     let dotSelector = [];
-    console.log('dotSelector: ', dotSelector);
     for(let i = 0; i < slide.length; i++) {
       dotSelector[i] = document.createElement('li');
     };
@@ -154,9 +153,6 @@ window.addEventListener('DOMContentLoaded', function(){
       dotList.appendChild(elem);
     });
     let dot = document.querySelectorAll('.dot');
-    console.log('dot1: ', dot);
-    console.log('dotList: ', dotList);
-
     let currentSlide = 0,
         interval;
     const prevSlide = (elem, index, strClass) => {
@@ -168,10 +164,11 @@ window.addEventListener('DOMContentLoaded', function(){
     const autoPlaySlide = () => {
       
       prevSlide(slide, currentSlide, 'portfolio-item-active');
-      // addSlide(document, currentSlide, 'li');
       prevSlide(dot, currentSlide, 'dot-active');
+
       currentSlide++;
       if (currentSlide >= slide.length) currentSlide = 0;
+
       nextSlide(slide, currentSlide, 'portfolio-item-active');
       nextSlide(dot, currentSlide, 'dot-active');
     };
@@ -212,10 +209,44 @@ window.addEventListener('DOMContentLoaded', function(){
     slider.addEventListener('mouseout', (event) => {
       if (event.target.matches('.portfolio-btn') ||
           event.target.matches('.dot')) {
-            stopSlide();
+            startSlide(1500);
       }
     });
     startSlide(1500);
   }
   slider();
+
+  // Hover change photo command
+  const commandPhoto = () => {
+    const commandImg = document.querySelectorAll('.command__photo');
+
+    commandImg.forEach(elem => {
+      const defImg = elem.src;
+
+      elem.addEventListener('mouseenter', (event) => {
+        event.target.src = event.target.dataset.img;
+      });
+
+      elem.addEventListener('mouseleave', (event) => {
+        event.target.src = defImg;
+      });
+
+    });
+  };
+  commandPhoto();
+  // Calc
+  const getCalc = () => {
+    const calcItem = document.querySelectorAll('[type="number"]');
+
+    calcItem.forEach( elem => {
+      elem.addEventListener('input', (event) => {
+
+        event.target.value = event.target.value.replace(/\D/, '');
+        console.log('event.target.value: ', event.target.value);
+
+      });
+    });
+  };
+  getCalc();
+
 });
