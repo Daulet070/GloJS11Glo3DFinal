@@ -250,7 +250,7 @@ window.addEventListener('DOMContentLoaded', function(){
     
   };
   getCalc();
-  
+
   // Calc
   const calc = (price = 100) => {
     const calcBlock = document.querySelector('.calc-block'),
@@ -271,17 +271,24 @@ window.addEventListener('DOMContentLoaded', function(){
       if (calcCount.value > 1) {
         countValue += (calcCount.value - 1) / 10;
       }
-
+       
       if (calcDay.value && calcDay.value < 5) {
+        console.log('calcDay.value2: ', calcDay.value);
         dayValue *= 2;
       } else if (calcDay.value && calcDay.value < 10) {
+        console.log('calcDay.value3: ', calcDay.value);
         dayValue *= 1.5;
-      }
+      } 
 
       if (typeValue && squareValue) {
         total = price * typeValue * squareValue * countValue * dayValue;
+        console.log('dayValue: ', dayValue);
+        console.log('countValue: ', countValue);
+        console.log('squareValue: ', squareValue);
       }
-
+      if (calcDay.value == 0 || calcCount.value == 0 || calcSquare == 0) {
+        total = 0;
+      }
       totalValue.textContent = total;
     };
 
@@ -294,5 +301,13 @@ window.addEventListener('DOMContentLoaded', function(){
     });
   }
   calc(100);
+
+  //Form validator
+  const valid = new Validator({
+    selector: '#form2',
+    pattern: {},
+    metod: {}
+  });
+  valid.init();
 
 });
