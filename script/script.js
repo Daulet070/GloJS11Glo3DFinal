@@ -289,7 +289,7 @@ window.addEventListener('DOMContentLoaded', function(){
       if (calcDay.value == 0 || calcCount.value == 0 || calcSquare == 0) {
         total = 0;
       }
-      totalValue.textContent = total;
+      totalValue.textContent = Math.round(total);
     };
 
     calcBlock.addEventListener('change', (event) => {
