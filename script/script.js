@@ -238,7 +238,6 @@ window.addEventListener('DOMContentLoaded', () => {
       elem.addEventListener('input', () => {
 
         elem.value = elem.value.replace(/\D/, '');
-        console.log('elem.value: ', elem.value);
 
       });
     });
@@ -289,5 +288,94 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   };
   calc(100);
+  // Send-AJAX-form
+  const sendForm = () => {
 
+    const errorMessage = 'Что-то пошло не так...',
+      loadMessage = 'Загрузка...',
+      successMessage = 'Спасибо! Мы скоро с вами свяжемся!',
+      statusMessage = document.createElement('span'),
+      allFormsId = ['#form1', '#form2', '#form3'],
+      allForms = document.querySelectorAll(allFormsId),
+      formsArray = [...allForms];
+
+    statusMessage.style.cssText = `font-size: 2rem;
+                                   color: #fff;`;
+
+    console.log('allForms NodeList: ', allForms);
+    console.log('formsArray: ', formsArray);
+
+    formsArray.forEach(elem => {
+
+      elem.addEventListener('input', () => {
+
+        const regex = /^[?!,.%:*(/\]><)_^#$@&~'}[{\-+="№;a-zA-Z0-9\s]+$/;
+
+        if (event.target.classList.contains('form-name')) {
+          const inputName = elem.querySelector('.form-name');
+          console.log('inputName: ', inputName);
+          inputName.value = inputName.value.replace(regex, '');
+        }
+
+        if (event.target.classList.contains('mess')) {
+          const inputMessage = elem.querySelector('.mess');
+          console.log('inputMessage: ', inputMessage);
+          inputMessage.value = inputMessage.value.replace(regex, '');
+        }
+      });
+      elem.addEventListener('submit', event => {
+        event.preventDefault();
+        elem.appendChild(statusMessage);
+
+        statusMessage.textContent = loadMessage;
+
+        const formData = new FormData(elem);
+        console.log('fonrmData: ', formData);
+
+        let body = {};
+        console.log('body: ', body);
+
+        for (let val of formData.entries()) {
+          body[val[0]] = val[1];
+        }
+
+        postData(body, () => {
+
+          statusMessage.textContent = successMessage;
+
+          setTimeout(() => {
+
+            statusMessage.remove();
+            const formInputs = elem.querySelectorAll('input');
+            console.log('formInputs: ', formInputs);
+
+            formInputs.forEach(elem => {
+              elem.value = '';
+            });
+
+          }, 2000);
+        }, error => {
+          statusMessage.textContent = errorMessage;
+          console.warn(error);
+        });
+      });
+    });
+    const postData = (body, outputData, errorData) => {
+      const request = new XMLHttpRequest();
+      request.addEventListener('readystatechange', () => {
+        if (request.readyState !== 4) {
+          return;
+        }
+        if (request.status === 200) {
+          outputData();
+        } else {
+          errorData(request.status);
+        }
+      });
+      request.open('POST', './server.php');
+      request.setRequestHeader('Content-Type', 'application/json');
+      request.send(JSON.stringify(body));
+    };
+  };
+  sendForm();
 });

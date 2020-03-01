@@ -16,10 +16,18 @@ class Validator {
     this.elementsForm.forEach(elem => elem
       .addEventListener('change', this.chekIt.bind(this)));
     this.form.forEach(elem => {
-      elem.addEventListener('submit', e => {
+      elem.addEventListener('submit', event => {
         this.elementsForm.forEach(elem => this.chekIt({ target: elem }));
         if (this.error.size) {
-          e.preventDefault();
+          event.preventDefault();
+        }
+      });
+      elem.addEventListener('change', () => {
+        if (this.error.size) {
+          elem.querySelector('.form-btn').disabled = true;
+          console.log('elemSelector: ', elem.querySelector('.form-btn'));
+        } else {
+          elem.querySelector('.form-btn').disabled = false;
         }
       });
     });
