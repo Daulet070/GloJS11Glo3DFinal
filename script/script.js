@@ -295,47 +295,48 @@ window.addEventListener('DOMContentLoaded', () => {
       loadMessage = 'Загрузка...',
       successMessage = 'Спасибо! Мы скоро с вами свяжемся!',
       statusMessage = document.createElement('span'),
-      allFormsId = ['#form1', '#form2', '#form3'],
-      allForms = document.querySelectorAll(allFormsId),
-      formsArray = [...allForms];
+      forms = document.querySelectorAll('form');
 
     statusMessage.style.cssText = `font-size: 2rem;
                                    color: #fff;`;
 
-    console.log('allForms NodeList: ', allForms);
-    console.log('formsArray: ', formsArray);
+    forms.forEach(elem => {
 
-    formsArray.forEach(elem => {
+      elem.addEventListener('input', event => {
+        const pattNameMess = /[?!,.%:*(/><)_^#$@&~'}[{\-+="№;a-zA-Z0-9]$/;
+        const patternPhone = /[а-яА-ЯЁёa-zA-Z?!,%@&~'}[{:*\-)<(^$=";\s]/;
+        const patternEmail = /[а-яА-ЯЁё?!,%&~'}[{:*(/><)^#$+="№;\s]/;
+        let target = event.target;
 
-      elem.addEventListener('input', () => {
-
-        const regex = /^[?!,.%:*(/\]><)_^#$@&~'}[{\-+="№;a-zA-Z0-9\s]+$/;
-
-        if (event.target.classList.contains('form-name')) {
-          const inputName = elem.querySelector('.form-name');
-          console.log('inputName: ', inputName);
-          inputName.value = inputName.value.replace(regex, '');
+        if (target.classList.contains('form-name')) {
+          target.value = target.value.replace(pattNameMess, '');
+          console.log('target.value-name: ', target.value);
         }
-
-        if (event.target.classList.contains('mess')) {
-          const inputMessage = elem.querySelector('.mess');
-          console.log('inputMessage: ', inputMessage);
-          inputMessage.value = inputMessage.value.replace(regex, '');
+        if (target.classList.contains('form-email')) {
+          target.value = target.value.replace(patternEmail, '').trim();
+          console.log('target.value-email: ', target.value);
+        }
+        if (target.classList.contains('form-phone')) {
+          target.value = target.value.replace(patternPhone, '');
+          console.log('target.value-phone: ', target.value);
+        }
+        if (target.classList.contains('mess')) {
+          target.value = target.value.replace(pattNameMess, '');
+          console.log('target.value-mess: ', target.value);
         }
       });
+
       elem.addEventListener('submit', event => {
         event.preventDefault();
         elem.appendChild(statusMessage);
 
         statusMessage.textContent = loadMessage;
 
-        const formData = new FormData(elem);
-        console.log('fonrmData: ', formData);
-
-        let body = {};
+        const formData = new FormData(elem),
+          body = {};
         console.log('body: ', body);
 
-        for (let val of formData.entries()) {
+        for (const val of formData.entries()) {
           body[val[0]] = val[1];
         }
 
@@ -347,7 +348,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
             statusMessage.remove();
             const formInputs = elem.querySelectorAll('input');
-            console.log('formInputs: ', formInputs);
 
             formInputs.forEach(elem => {
               elem.value = '';
@@ -361,20 +361,27 @@ window.addEventListener('DOMContentLoaded', () => {
       });
     });
     const postData = (body, outputData, errorData) => {
+
       const request = new XMLHttpRequest();
+
       request.addEventListener('readystatechange', () => {
+
         if (request.readyState !== 4) {
           return;
         }
+
         if (request.status === 200) {
           outputData();
         } else {
           errorData(request.status);
         }
+
       });
+
       request.open('POST', './server.php');
       request.setRequestHeader('Content-Type', 'application/json');
       request.send(JSON.stringify(body));
+
     };
   };
   sendForm();
