@@ -310,19 +310,15 @@ window.addEventListener('DOMContentLoaded', () => {
 
         if (target.classList.contains('form-name')) {
           target.value = target.value.replace(pattNameMess, '');
-          console.log('target.value-name: ', target.value);
         }
         if (target.classList.contains('form-email')) {
           target.value = target.value.replace(patternEmail, '').trim();
-          console.log('target.value-email: ', target.value);
         }
         if (target.classList.contains('form-phone')) {
           target.value = target.value.replace(patternPhone, '');
-          console.log('target.value-phone: ', target.value);
         }
         if (target.classList.contains('mess')) {
           target.value = target.value.replace(pattNameMess, '');
-          console.log('target.value-mess: ', target.value);
         }
       });
 
@@ -340,12 +336,10 @@ window.addEventListener('DOMContentLoaded', () => {
           body[val[0]] = val[1];
         }
 
-        postData(body, () => {
-
+        const outputData = () => {
           statusMessage.textContent = successMessage;
 
           setTimeout(() => {
-
             statusMessage.remove();
             const formInputs = elem.querySelectorAll('input');
 
@@ -354,34 +348,39 @@ window.addEventListener('DOMContentLoaded', () => {
             });
 
           }, 2000);
-        }, error => {
-          statusMessage.textContent = errorMessage;
-          console.warn(error);
-        });
+        };
+
+        postData(body)
+          .then(outputData)
+          .catch(error => {
+            statusMessage.textContent = errorMessage;
+            console.warn(error);
+          });
+
       });
     });
-    const postData = (body, outputData, errorData) => {
 
-      const request = new XMLHttpRequest();
+    const postData = (body, outputData) => {
+      return new Promise((resolve, reject) => {
+        const request = new XMLHttpRequest();
 
-      request.addEventListener('readystatechange', () => {
+        request.addEventListener('readystatechange', () => {
 
-        if (request.readyState !== 4) {
-          return;
-        }
+          if (request.readyState !== 4) {
+            return;
+          }
 
-        if (request.status === 200) {
-          outputData();
-        } else {
-          errorData(request.status);
-        }
+          if (request.status === 200) {
+            resolve(outputData);
+          } else {
+            reject(request.status);
+          }
 
+        });
+        request.open('POST', './server.php');
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.send(JSON.stringify(body));
       });
-
-      request.open('POST', './server.php');
-      request.setRequestHeader('Content-Type', 'application/json');
-      request.send(JSON.stringify(body));
-
     };
   };
   sendForm();
