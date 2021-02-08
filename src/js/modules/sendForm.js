@@ -45,7 +45,7 @@ const sendForm = () => {
 
       postData(body)
         .then(response => {
-          if (response.status !== 200) {
+          if (response.status !== 200 || 201 || 204) {
             throw new Error('status network not 200');
           }
           statusMessage.textContent = successMessage;
@@ -67,8 +67,9 @@ const sendForm = () => {
     });
   });
 // import '../../server/server.php'
+// https://jsonplaceholder.typicode.com/posts
   const postData = (body) => {
-    return fetch('https://jsonplaceholder.typicode.com/posts', {
+    return fetch('../../server/server.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
