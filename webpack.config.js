@@ -1,14 +1,13 @@
-// 'use strict';
 const path = require('path');
 
 module.exports = {
   entry: {
-    main: './src/index.js'
+    main: './src/js/index.js'
   },
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, './docs/js'),
     filename: '[name].js',
-    publicPath: '/dist'
+    publicPath: '/docs/js'
   },
   devServer: {
     overlay: true
