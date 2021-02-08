@@ -66,9 +66,9 @@ const sendForm = () => {
 
     });
   });
-
+// import '../../server/server.php'
   const postData = (body) => {
-    return fetch('./server/server.php', {
+    return fetch('https://jsonplaceholder.typicode.com/posts', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
