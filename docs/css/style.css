@@ -1,7 +1,7 @@
 @font-face {
 	font-family: Roboto;
-	src: url(./public/fonts/Roboto-Light.eot);
-	src: url(./public/fonts/Roboto-Light.eot?#iefix) format("embedded-opentype"), url(./public/fonts/Roboto-Light.woff2) format("woff2"), url(./public/fonts/Roboto-Light.woff) format("woff"), url(./public/fonts/Roboto-Light.ttf) format("truetype"), url(./public/fonts/Roboto-Light.svg#Roboto-Light) format("svg");
+	src: url(../public/fonts/Roboto-Light.eot);
+	src: url(../public/fonts/Roboto-Light.eot?#iefix) format("embedded-opentype"), url(../public/fonts/Roboto-Light.woff2) format("woff2"), url(../public/fonts/Roboto-Light.woff) format("woff"), url(../public/fonts/Roboto-Light.ttf) format("truetype"), url(../public/fonts/Roboto-Light.svg#Roboto-Light) format("svg");
 	font-weight: 300;
 	font-style: normal;
 	font-display: swap
@@ -9,8 +9,8 @@
 
 @font-face {
 	font-family: Roboto;
-	src: url(./public/fonts/Roboto-Regular.eot);
-	src: url(./public/fonts/Roboto-Regular.eot?#iefix) format("embedded-opentype"), url(./public/fonts/Roboto-Regular.woff2) format("woff2"), url(./public/fonts/Roboto-Regular.woff) format("woff"), url(./public/fonts/Roboto-Regular.ttf) format("truetype"), url(./public/fonts/Roboto-Regular.svg#Roboto-Regular) format("svg");
+	src: url(../public/fonts/Roboto-Regular.eot);
+	src: url(../public/fonts/Roboto-Regular.eot?#iefix) format("embedded-opentype"), url(../public/fonts/Roboto-Regular.woff2) format("woff2"), url(../public/fonts/Roboto-Regular.woff) format("woff"), url(../public/fonts/Roboto-Regular.ttf) format("truetype"), url(../public/fonts/Roboto-Regular.svg#Roboto-Regular) format("svg");
 	font-weight: 400;
 	font-style: normal;
 	font-display: swap
@@ -18,8 +18,8 @@
 
 @font-face {
 	font-family: Roboto;
-	src: url(./public/fonts/Roboto-Medium.eot);
-	src: url(./public/fonts/Roboto-Medium.eot?#iefix) format("embedded-opentype"), url(./public/fonts/Roboto-Medium.woff2) format("woff2"), url(./public/fonts/Roboto-Medium.woff) format("woff"), url(./public/fonts/Roboto-Medium.ttf) format("truetype"), url(./public/fonts/Roboto-Medium.svg#Roboto-Medium) format("svg");
+	src: url(../public/fonts/Roboto-Medium.eot);
+	src: url(../public/fonts/Roboto-Medium.eot?#iefix) format("embedded-opentype"), url(../public/fonts/Roboto-Medium.woff2) format("woff2"), url(../public/fonts/Roboto-Medium.woff) format("woff"), url(../public/fonts/Roboto-Medium.ttf) format("truetype"), url(../public/fonts/Roboto-Medium.svg#Roboto-Medium) format("svg");
 	font-weight: 500;
 	font-style: normal;
 	font-display: swap
@@ -27,8 +27,8 @@
 
 @font-face {
 	font-family: Roboto;
-	src: url(./public/fonts/Roboto-Bold.eot);
-	src: url(./public/fonts/Roboto-Bold.eot?#iefix) format("embedded-opentype"), url(./public/fonts/Roboto-Bold.woff2) format("woff2"), url(./public/fonts/Roboto-Bold.woff) format("woff"), url(./public/fonts/Roboto-Bold.ttf) format("truetype"), url(./public/fonts/Roboto-Bold.svg#Roboto-Bold) format("svg");
+	src: url(../public/fonts/Roboto-Bold.eot);
+	src: url(../public/fonts/Roboto-Bold.eot?#iefix) format("embedded-opentype"), url(../public/fonts/Roboto-Bold.woff2) format("woff2"), url(../public/fonts/Roboto-Bold.woff) format("woff"), url(../public/fonts/Roboto-Bold.ttf) format("truetype"), url(../public/fonts/Roboto-Bold.svg#Roboto-Bold) format("svg");
 	font-weight: 700;
 	font-style: normal;
 	font-display: swap
@@ -221,7 +221,7 @@ body button:hover {
 main {
 	padding-top: 1rem;
 	padding-bottom: 2.6rem;
-	background: url(./public/images/main-bg.jpg) center/cover no-repeat fixed;
+	background: url(../public/images/main-bg.jpg) center/cover no-repeat fixed;
 	color: #fff
 }
 
@@ -448,13 +448,13 @@ main a {
 
 .portfolio-btn.prev {
 	left: 20px;
-	background-image: url(./public/images/icons/left-arrow.svg);
+	background-image: url(../public/images/icons/left-arrow.svg);
 	background-position: 25% 50%
 }
 
 .portfolio-btn.next {
 	right: 20px;
-	background-image: url(./public/images/icons/right-arrow.svg);
+	background-image: url(../public/images/icons/right-arrow.svg);
 	background-position: 75% 50%
 }
 
@@ -666,7 +666,7 @@ main a {
 .connect {
 	padding-top: 5rem;
 	padding-bottom: 5rem;
-	background-image: url(./public/images/connect/connect-bg.jpg);
+	background-image: url(../public/images/connect/connect-bg.jpg);
 	background-attachment: fixed;
 	background-position: center;
 	color: #fff
@@ -822,7 +822,7 @@ footer .web {
 
 .thanks-block {
 	padding-top: 10rem;
-	background-image: url(./public/images/main-bg.jpg);
+	background-image: url(../public/images/main-bg.jpg);
 	background-position: center;
 	text-align: center;
 	height: 50rem
